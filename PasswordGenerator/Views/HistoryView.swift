@@ -24,22 +24,25 @@ struct HistoryView: View {
     private func delete(at offsets: IndexSet) {
         withAnimation {
             passwordModel.history.remove(atOffsets: offsets)
+            HapticManager.shared.triggerMediumImpact()  // Add haptic feedback when deleting
         }
     }
     
     private func clearHistory() {
         withAnimation {
             passwordModel.clearHistory()
+            HapticManager.shared.triggerHeavyImpact()  // Add haptic feedback for clear history
         }
     }
     
     private func checkAuthentication() {
         AuthenticationManager.shared.authenticateWithBiometrics { success in
-            // success
             if success {
                 isAuthenticated = true
+                HapticManager.shared.triggerLightImpact()  // Add haptic feedback on successful authentication
             } else {
                 showingAuthenticationErrorAlert = true
+                HapticManager.shared.triggerHeavyImpact()  // Haptic feedback on authentication failure
             }
         }
     }
@@ -72,7 +75,7 @@ struct HistoryView: View {
                                 }
                                 .transition(.opacity)
                             }
-                            .onDelete(perform: delete)
+                            .onDelete(perform: delete)  // Apply haptic on delete
                         }
                         .animation(.default, value: passwordModel.history)
                         
@@ -93,7 +96,7 @@ struct HistoryView: View {
                                 title: Text("Clear History"),
                                 message: Text("Are you sure you want to clear all saved passwords? This action cannot be undone."),
                                 primaryButton: .destructive(Text("Clear")) {
-                                    clearHistory()
+                                    clearHistory()  // Apply haptic when clearing history
                                 },
                                 secondaryButton: .cancel()
                             )
@@ -146,7 +149,7 @@ struct HistoryView: View {
         .alert(isPresented: $showingAuthenticationErrorAlert) {
             Alert(
                 title: Text("Authentication Failed"),
-                message: Text("Authentication failed. Please check your biometric settings."),
+                message: Text("Authentication failed. Please check your biometric settings or try again."),
                 dismissButton: .default(Text("OK"))
             )
         }

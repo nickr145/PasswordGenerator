@@ -17,6 +17,7 @@
 		5BA08A332C96632600906473 /* EncryptionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A322C96632600906473 /* EncryptionUtils.swift */; };
 		5BA08A382C96931800906473 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A372C96931800906473 /* KeychainHelper.swift */; };
 		5BA08A3A2C96B13100906473 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A392C96B13100906473 /* AuthenticationManager.swift */; };
+		5BA08A3E2C975E7400906473 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A3D2C975E7400906473 /* HapticManager.swift */; };
 		5BA3A14B2BD899920049338D /* PasswordGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A14A2BD899920049338D /* PasswordGeneratorApp.swift */; };
 		5BA3A14F2BD899930049338D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BA3A14E2BD899930049338D /* Assets.xcassets */; };
 		5BA3A1532BD899930049338D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BA3A1522BD899930049338D /* Preview Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		5BA08A322C96632600906473 /* EncryptionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionUtils.swift; sourceTree = "<group>"; };
 		5BA08A372C96931800906473 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		5BA08A392C96B13100906473 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		5BA08A3D2C975E7400906473 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		5BA3A1472BD899920049338D /* PasswordGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasswordGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA3A14A2BD899920049338D /* PasswordGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorApp.swift; sourceTree = "<group>"; };
 		5BA3A14E2BD899930049338D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				5BA08A322C96632600906473 /* EncryptionUtils.swift */,
 				5BA08A372C96931800906473 /* KeychainHelper.swift */,
 				5BA08A392C96B13100906473 /* AuthenticationManager.swift */,
+				5BA08A3D2C975E7400906473 /* HapticManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				5B50308D2C81246D0033BDD2 /* StartingView.swift in Sources */,
 				5BA08A332C96632600906473 /* EncryptionUtils.swift in Sources */,
 				5B50308F2C8126E60033BDD2 /* UIImageExtension.swift in Sources */,
+				5BA08A3E2C975E7400906473 /* HapticManager.swift in Sources */,
 				5B5030952C8164A80033BDD2 /* SavedPasswordStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
