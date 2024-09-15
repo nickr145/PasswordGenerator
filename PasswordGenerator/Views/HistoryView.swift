@@ -11,7 +11,6 @@ struct HistoryView: View {
     
     @EnvironmentObject var passwordModel: PasswordModel
     @State private var showingClearHistoryAlert = false
-    @State private var animateClear = false
     
     private func delete(at offsets: IndexSet) {
         withAnimation {
@@ -21,11 +20,7 @@ struct HistoryView: View {
     
     private func clearHistory() {
         withAnimation {
-            animateClear = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                passwordModel.clearHistory()
-                animateClear = false
-            }
+            passwordModel.clearHistory()
         }
     }
     
@@ -57,8 +52,8 @@ struct HistoryView: View {
                             .transition(.opacity)
                         }
                         .onDelete(perform: delete)
-                        .animation(animateClear ? .easeOut(duration: 0.3) : .default, value: passwordModel.history)
                     }
+                    .animation(.default, value: passwordModel.history)
                     
                     Button(action: {
                         showingClearHistoryAlert = true
@@ -83,14 +78,20 @@ struct HistoryView: View {
                         )
                     }
                 } else {
-                    Text("Time to Start Creating Some Secure Passwords!")
-                        .fontWeight(.semibold)
-                        .padding()
-                        .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
-                        .shadow(color: .red.opacity(0.6), radius: 5, x: 0, y: 5)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 20)
+                    GeometryReader { geometry in
+                        VStack {
+                            Text("Time to Start Creating Some Secure Passwords!")
+                                .fontWeight(.semibold)
+                                .padding()
+                                .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(10)
+                                .shadow(color: .red.opacity(0.6), radius: 5, x: 0, y: 5)
+                                .frame(width: geometry.size.width * 0.8) // Centered with some margin
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure it's centered in the available space
+                    }
+                    .padding(.horizontal, 20) // Additional padding around the GeometryReader
                 }
             }
             .padding(.bottom, 50)

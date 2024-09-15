@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct PasswordGeneratorApp: App {
+    @StateObject var passwordModel = PasswordModel() // Initialize the PasswordModel
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartingView()
+                .environmentObject(passwordModel) // Pass it to the environment
         }
     }
 }
+
+
+
