@@ -16,6 +16,7 @@
 		5B5030952C8164A80033BDD2 /* SavedPasswordStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5030942C8164A80033BDD2 /* SavedPasswordStruct.swift */; };
 		5BA08A332C96632600906473 /* EncryptionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A322C96632600906473 /* EncryptionUtils.swift */; };
 		5BA08A382C96931800906473 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A372C96931800906473 /* KeychainHelper.swift */; };
+		5BA08A3A2C96B13100906473 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA08A392C96B13100906473 /* AuthenticationManager.swift */; };
 		5BA3A14B2BD899920049338D /* PasswordGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A14A2BD899920049338D /* PasswordGeneratorApp.swift */; };
 		5BA3A14F2BD899930049338D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BA3A14E2BD899930049338D /* Assets.xcassets */; };
 		5BA3A1532BD899930049338D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BA3A1522BD899930049338D /* Preview Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		5B5030942C8164A80033BDD2 /* SavedPasswordStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPasswordStruct.swift; sourceTree = "<group>"; };
 		5BA08A322C96632600906473 /* EncryptionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionUtils.swift; sourceTree = "<group>"; };
 		5BA08A372C96931800906473 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		5BA08A392C96B13100906473 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		5BA3A1472BD899920049338D /* PasswordGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasswordGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA3A14A2BD899920049338D /* PasswordGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorApp.swift; sourceTree = "<group>"; };
 		5BA3A14E2BD899930049338D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				5B5030862C80F10A0033BDD2 /* PasswordModel.swift */,
 				5BA08A322C96632600906473 /* EncryptionUtils.swift */,
 				5BA08A372C96931800906473 /* KeychainHelper.swift */,
+				5BA08A392C96B13100906473 /* AuthenticationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				5B5030912C813CE10033BDD2 /* HistoryView.swift in Sources */,
 				5BA3A14B2BD899920049338D /* PasswordGeneratorApp.swift in Sources */,
+				5BA08A3A2C96B13100906473 /* AuthenticationManager.swift in Sources */,
 				5B5030872C80F10A0033BDD2 /* PasswordModel.swift in Sources */,
 				5BA08A382C96931800906473 /* KeychainHelper.swift in Sources */,
 				5B5030892C810D830033BDD2 /* MainView.swift in Sources */,
@@ -482,6 +486,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Password Generator";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID to authenticate you.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -519,6 +524,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Password Generator";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID to authenticate you.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

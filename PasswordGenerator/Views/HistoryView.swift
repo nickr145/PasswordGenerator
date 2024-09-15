@@ -5,12 +5,21 @@
 //  Created by Nicholas Rebello on 2024-08-29.
 //
 
+//
+//  HistoryView.swift
+//  PasswordGenerator
+//
+//  Created by Nicholas Rebello on 2024-08-29.
+//
+
 import SwiftUI
 
 struct HistoryView: View {
     
     @EnvironmentObject var passwordModel: PasswordModel
     @State private var showingClearHistoryAlert = false
+    @State private var isAuthenticated = false
+    @State private var showingAuthenticationErrorAlert = false
     
     private func delete(at offsets: IndexSet) {
         withAnimation {
@@ -24,6 +33,17 @@ struct HistoryView: View {
         }
     }
     
+    private func checkAuthentication() {
+        AuthenticationManager.shared.authenticateWithBiometrics { success in
+            // success
+            if success {
+                isAuthenticated = true
+            } else {
+                showingAuthenticationErrorAlert = true
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             // Background Gradient
@@ -31,70 +51,104 @@ struct HistoryView: View {
                            startPoint: .topLeading, endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                // Title
-                Text("Password History")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding(.top, 30)
-                
-                if !passwordModel.history.isEmpty {
-                    // List of Saved Passwords
-                    List {
-                        ForEach(passwordModel.history) { savedPassword in
-                            VStack(alignment: .leading) {
-                                Text(savedPassword.name)
-                                    .font(.headline)
-                                Text(savedPassword.password)
-                                    .font(.body)
-                            }
-                            .transition(.opacity)
-                        }
-                        .onDelete(perform: delete)
-                    }
-                    .animation(.default, value: passwordModel.history)
+            if isAuthenticated {
+                VStack {
+                    // Title
+                    Text("Password History")
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(.white)
+                        .padding(.top, 30)
                     
-                    Button(action: {
-                        showingClearHistoryAlert = true
-                    }) {
-                        Text("Clear History")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
-                            .cornerRadius(10)
-                            .shadow(color: .red.opacity(0.6), radius: 5, x: 0, y: 5)
-                    }
-                    .padding()
-                    .alert(isPresented: $showingClearHistoryAlert) {
-                        Alert(
-                            title: Text("Clear History"),
-                            message: Text("Are you sure you want to clear all saved passwords? This action cannot be undone."),
-                            primaryButton: .destructive(Text("Clear")) {
-                                clearHistory()
-                            },
-                            secondaryButton: .cancel()
-                        )
-                    }
-                } else {
-                    GeometryReader { geometry in
-                        VStack {
-                            Text("Time to Start Creating Some Secure Passwords!")
+                    if !passwordModel.history.isEmpty {
+                        // List of Saved Passwords
+                        List {
+                            ForEach(passwordModel.history) { savedPassword in
+                                VStack(alignment: .leading) {
+                                    Text(savedPassword.name)
+                                        .font(.headline)
+                                    Text(savedPassword.password)
+                                        .font(.body)
+                                }
+                                .transition(.opacity)
+                            }
+                            .onDelete(perform: delete)
+                        }
+                        .animation(.default, value: passwordModel.history)
+                        
+                        Button(action: {
+                            showingClearHistoryAlert = true
+                        }) {
+                            Text("Clear History")
                                 .fontWeight(.semibold)
+                                .foregroundColor(.white)
                                 .padding()
                                 .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
                                 .cornerRadius(10)
                                 .shadow(color: .red.opacity(0.6), radius: 5, x: 0, y: 5)
-                                .frame(width: geometry.size.width * 0.8) // Centered with some margin
-                                .multilineTextAlignment(.center)
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure it's centered in the available space
+                        .padding()
+                        .alert(isPresented: $showingClearHistoryAlert) {
+                            Alert(
+                                title: Text("Clear History"),
+                                message: Text("Are you sure you want to clear all saved passwords? This action cannot be undone."),
+                                primaryButton: .destructive(Text("Clear")) {
+                                    clearHistory()
+                                },
+                                secondaryButton: .cancel()
+                            )
+                        }
+                    } else {
+                        GeometryReader { geometry in
+                            VStack {
+                                Text("Time to Start Creating Some Secure Passwords!")
+                                    .fontWeight(.semibold)
+                                    .padding()
+                                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+                                    .cornerRadius(10)
+                                    .shadow(color: .red.opacity(0.6), radius: 5, x: 0, y: 5)
+                                    .frame(width: geometry.size.width * 0.8) // Centered with some margin
+                                    .multilineTextAlignment(.center)
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure it's centered in the available space
+                        }
+                        .padding(.horizontal, 20) // Additional padding around the GeometryReader
                     }
-                    .padding(.horizontal, 20) // Additional padding around the GeometryReader
+                }
+                .padding(.bottom, 50)
+            } else {
+                VStack {
+                    Text("Authentication Required")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    Text("Please authenticate to view the history.")
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    Button(action: checkAuthentication) {
+                        Text("Authenticate")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(LinearGradient(gradient: Gradient(colors: [Color.green, Color.teal]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(25)
+                            .shadow(color: .green.opacity(0.6), radius: 5, x: 0, y: 5)
+                    }
+                    .padding(.horizontal)
                 }
             }
-            .padding(.bottom, 50)
+        }
+        .onAppear {
+            checkAuthentication()
+        }
+        .alert(isPresented: $showingAuthenticationErrorAlert) {
+            Alert(
+                title: Text("Authentication Failed"),
+                message: Text("Authentication failed. Please check your biometric settings."),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
 }
@@ -109,3 +163,5 @@ struct HistoryView: View {
     return HistoryView()
         .environmentObject(model)
 }
+
+
