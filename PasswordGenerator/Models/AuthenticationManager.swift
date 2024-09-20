@@ -4,7 +4,7 @@
 //
 //  Created by Nicholas Rebello on 2024-09-15.
 //
-
+/*
 import LocalAuthentication
 
 class AuthenticationManager {
@@ -39,4 +39,4 @@ class AuthenticationManager {
     }
 }
 
-
+*/

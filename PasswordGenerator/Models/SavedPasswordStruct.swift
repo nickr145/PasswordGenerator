@@ -8,7 +8,7 @@
 import Foundation
 
 struct SavedPassword: Identifiable, Codable, Equatable {
-    let id = UUID()
+    var id = UUID()
     let name: String
     let password: String
     
